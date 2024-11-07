@@ -18,17 +18,17 @@ if __name__ == '__main__':
 session.query(Game).delete()
 session.commit()
 
-botw = Game(title="Breath of the Wild", platform="Switch", genre="Adventure", price=60)
-ffvii = Game(title="Final Fantasy VII", platform="Playstation", genre="RPG", price=30)
-mk8 = Game(title="Mario Kart 8", platform="Switch", genre="Racing", price=50)
+# Add a console message so we can see output when the seed file runs
+print("Seeding games...")
 
-session.add_all([botw, ffvii, mk8])
-session.commit()
+games = [
+    Game(
+        title=fake.name(),
+        genre=fake.word(),
+        platform=fake.word(),
+        price=random.randint(0, 60)
+    )
+for i in range(50)]
 
-botw = Game(title="Breath of the Wild", platform="Switch", genre="Adventure", price=60)
-ffvii = Game(title="Final Fantasy VII", platform="Playstation", genre="RPG", price=30)
-mk8 = Game(title="Mario Kart 8", platform="Switch", genre="Racing", price=50)
-ccs = Game(title="Candy Crush Saga", platform="Mobile", genre="Puzzle", price=0)
-
-session.add_all([botw, ffvii, mk8, ccs])
+session.add_all(games)
 session.commit()
